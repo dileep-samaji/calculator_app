@@ -3,9 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 import uvicorn
-
-
-from .api.calculator import router as calculator_router
+from api.calculator import router as calculator_router
 
 app = FastAPI(
     title="Calculator API",
