@@ -52,9 +52,11 @@ jobs:
           name: python-app
           path: |
             .
-            !antenv/
+            !.git/
+            !.github/
             !frontend/node_modules/
             !frontend/src/
+            !frontend/dist/
 
   deploy:
     runs-on: ubuntu-latest
