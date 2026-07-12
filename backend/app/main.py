@@ -5,7 +5,7 @@ from pathlib import Path
 import uvicorn
 
 
-from app.api.calculator import router as calculator_router
+from .api.calculator import router as calculator_router
 
 app = FastAPI(
     title="Calculator API",
