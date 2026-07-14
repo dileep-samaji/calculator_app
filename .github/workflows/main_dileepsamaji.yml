@@ -101,4 +101,3 @@ jobs:
           slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_177E80AACC5948CA8025AE0B589F21F5 }}
           package: .
-          startup-command: gunicorn --bind=0.0.0.0:8000 --workers=2 --worker-class=uvicorn.workers.UvicornWorker --chdir backend app.main:app
