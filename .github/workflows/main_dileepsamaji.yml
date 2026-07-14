@@ -56,7 +56,7 @@ jobs:
 
       - name: Smoke test application
         run: |
-          python -c "from app.main import app; assert any(route.path == '/' for route in app.routes)"
+          python -c "from app.main import app; assert any(getattr(route, 'path', None) == '/calculate' for route in app.routes)"
         env:
           PYTHONPATH: backend
 
