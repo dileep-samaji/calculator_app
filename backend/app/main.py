@@ -1,9 +1,10 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from pathlib import Path
-import uvicorn
-from api.calculator import router as calculator_router
+
+from app.api.calculator import router as calculator_router
 
 app = FastAPI(
     title="Calculator API",
@@ -20,16 +21,16 @@ app.add_middleware(
 
 app.include_router(calculator_router)
 
-@app.get("/")
-def home():
-    return {
-        "message": "Calculator API Running Successfully"
-    }
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
-# Serve static frontend files
-static_dir = Path(__file__).parent / "static"
-if static_dir.exists():
-    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+@app.get("/api")
+def api():
+    return {"message": "Calculator API Running Successfully"}
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+
+if STATIC_DIR.exists() and any(STATIC_DIR.iterdir()):
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="frontend")
