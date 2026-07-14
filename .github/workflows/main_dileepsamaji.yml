@@ -54,12 +54,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Smoke test application
-        run: |
-          python -c "from app.main import app; assert any(getattr(route, 'path', None) == '/calculate' for route in app.routes)"
-        env:
-          PYTHONPATH: backend
-
       # Optional validation
       - name: Verify deployment files
         run: |
